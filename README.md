@@ -1,27 +1,24 @@
-# RealtimeVehicleTracking
+# RealtimeVehicleTracking - Backend
 
-This repository contains a Proof of Concept (PoC) for an event-driven middleware designed to ingest, validate, and orchestrate vehicle data in real-time. 
+This repository contains the backend service for the RealtimeVehicleTracking project. It is a Node.js and Express application designed to handle routes, controllers, and database interactions for vehicle data orchestration.
 
-The architecture simulates a modernization scenario where a legacy system coexists with a new event-sourced database.
+## Project Structure
 
-## Architecture Overview
-
-Based on the system design, the application acts as a Middleware (Subscriber + Orchestrator) that handles the following workflow:
-
-1. Event Ingestion: A frontend application (Tablet/Panel) publishes a VEICULO/INSERT event containing vehicle details (license plate, chassis, model, etc.) via MQTT Broker.
-2. Orchestration & Validation: The middleware receives the event, normalizes the payload, and queries a legacy Oracle database to check if the vehicle already exists.
-3. Persistence: 
-   * The event is persisted into a PostgreSQL database acting as the new system's Event Store.
-   * (Optional) If required for temporary consistency or if the legacy system remains the source of truth, the middleware also syncs the data back to the Oracle registry.
-4. Monitoring: A Dashboard reads from the synchronized data to display real-time status, vehicle lists, and integration history.
+* `server.js` & `app.js`: Application entry points and configuration.
+* `routes/`: Express route definitions (`veiculo.js`, `teste.js`).
+* `controllers/`: Business logic and request handling (`controller_veiculos.js`, `controller_teste.js`).
+* `Repositories/`: Data access layer and database queries (`testeDBRepo.js`).
 
 ## Tech Stack
 
-* Broker: MQTT
-* Orchestrator/Middleware: C# / .NET
-* Databases: PostgreSQL (New Event Store) & Oracle (Legacy Database)
-* Data Format: JSON
+* Runtime: Node.js
+* Framework: Express
+* Language: JavaScript
 
-## Purpose
+## How to Run
 
-The goal of this project is to test event-driven architecture patterns, data normalization, legacy system integration, and dual-write/event-sourcing persistence strategies.
+1. Clone the repository.
+2. Create a `.env` file based on `.env.example` and fill in your credentials.
+3. Install dependencies:
+```bash
+   npm install
