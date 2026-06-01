@@ -22,3 +22,7 @@ This repository contains the backend service for the RealtimeVehicleTracking pro
 3. Install dependencies:
 ```bash
    npm install
+```
+4. Run Server:
+```bash
+   npm run dev
