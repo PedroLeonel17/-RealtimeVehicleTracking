@@ -1,6 +1,5 @@
 import express from 'express';
 import postgress from 'postgres';
-import sqlite from 'sqlite3';
 import veiculoRoutes from './routes/veiculo.js';
 import testeRoutes from './routes/teste.js';
 import ControllerVeiculos from './controllers/controller_veiculos.js';
@@ -14,8 +13,17 @@ dotenv.config({ path: '.env' });
 
 const app = express();
 
+
+
 const db_path = process.env.NODE_ENV === "development" ? process.env.DB_PATH : process.env.POSTGRES_URL;
-const db = process.env.NODE_ENV === "development" ? new sqlite.Database(db_path) : postgress(process.env.POSTGRES_URL);
+let db;
+
+if (process.env.NODE_ENV === 'development') {
+    const sqlite = await import('sqlite3');
+    db = sqlite.default;
+} else {
+    db = postgres(process.env.POSTGRES_URL);
+}
 const myRepo = process.env.NODE_ENV === "development" ? new sqlite3Repository(db) : new postgressRepository(db);
 
 app.use(express.json());
