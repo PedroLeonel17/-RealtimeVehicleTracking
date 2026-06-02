@@ -7,7 +7,6 @@ const PORT =  process.env.NODE_ENV === "development" ? process.env.PORT_TEST : p
 
 console.log(`Servidor rodando na porta ${PORT}, link: http://localhost:${PORT}`);
 
-app.listen({
-    host: '0.0.0.0',
-    port: PORT
-})
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+});
