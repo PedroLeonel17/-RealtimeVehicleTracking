@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import app from './app.js';
-
+// coloquei um comentário aqui para testar o commit
 dotenv.config({ path: '.env' });
 
 const PORT =  process.env.NODE_ENV === "development" ? process.env.PORT_TEST : process.env.PORT;
