@@ -1,5 +1,5 @@
 import express from 'express';
-import postgress from 'postgres';
+import postgres from 'postgres';
 import veiculoRoutes from './routes/veiculo.js';
 import testeRoutes from './routes/teste.js';
 import ControllerVeiculos from './controllers/controller_veiculos.js';
