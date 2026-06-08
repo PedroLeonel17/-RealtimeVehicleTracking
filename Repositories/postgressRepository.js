@@ -1,3 +1,6 @@
+import { randomUUID } from "crypto";
+
+
 class postgressRepository {
     constructor(db) {
         this.db =db;
@@ -9,14 +12,15 @@ class postgressRepository {
         `;
     }
 
-   async create(marca){
+   async create(plate, model, vehicle_year){
+    const driver_id = randomUUID();
 
     const [veiculo] = await this.db`
-        INSERT INTO veiculos (marca)
-        VALUES (${marca})
+        INSERT INTO veiculos (plate, model, vehicle_year, driver_id)
+        VALUES (${plate}, ${model}, ${vehicle_year}, ${driver_id})
         RETURNING *
     `;
-
+    
     return veiculo;
 }
 

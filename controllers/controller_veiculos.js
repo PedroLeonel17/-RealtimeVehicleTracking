@@ -6,9 +6,9 @@ class ControllerVeiculos {
 
     create = async (req, res) => {
         
-        const {marca } = req.body;
+        const {plate, model, vehicle_year, driver_id } = req.body;
 
-        const resp = await this.repo.create( marca);
+        const resp = await this.repo.create( plate, model, vehicle_year, driver_id);
 
         res.json(resp);
     }
