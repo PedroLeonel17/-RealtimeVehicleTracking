@@ -16,15 +16,17 @@ const app = express();
 
 
 const db_path = process.env.NODE_ENV === "development" ? process.env.DB_PATH : process.env.POSTGRES_URL;
-let db;
+const legacy_db_path = process.env.NODE_ENV === "development" ? process.env.DB_PATH : process.env.LEGACY_DB_PATH;
+
+let legacy_db;
 
 if (process.env.NODE_ENV === 'development') {
     const sqlite = await import('sqlite3');
-    db = sqlite.default;
+    legacy_db = sqlite.default;
 } else {
-    db = postgres(process.env.POSTGRES_URL);
+    legacy_db = postgres(legacy_db_path);
 }
-const myRepo = process.env.NODE_ENV === "development" ? new sqlite3Repository(db) : new postgressRepository(db);
+const myRepo = process.env.NODE_ENV === "development" ? new sqlite3Repository(legacy_db) : new postgressRepository(legacy_db);
 
 app.use(express.json());
 
