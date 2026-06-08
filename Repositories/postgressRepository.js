@@ -12,12 +12,12 @@ class postgressRepository {
         `;
     }
 
-   async create(plate, model, vehicle_year){
-    const id = randomUUID();
+   async create(id, plate, model, vehicle_year, driver_id){
+    
 
     const [veiculo] = await this.db`
         INSERT INTO vehicle (id, plate, model, vehicle_year, driver_id)
-        VALUES (${id}, ${plate}, ${model}, ${vehicle_year}, ${"550e8400-e29b-41d4-a716-446655440000"})
+        VALUES (${id}, ${plate}, ${model}, ${vehicle_year}, ${driver_id})
         RETURNING *
     `;
     

@@ -1,3 +1,6 @@
+
+import { randomUUID } from "crypto";
+
 class ControllerVeiculos {
     constructor(repo) {
         this.repo = repo;
@@ -6,9 +9,10 @@ class ControllerVeiculos {
 
     create = async (req, res) => {
         
-        const {plate, model, vehicle_year, driver_id } = req.body;
+        const {plate, model, vehicle_year} = req.body;
 
-        const resp = await this.repo.create( plate, model, vehicle_year, driver_id);
+        const driver_id= "550e8400-e29b-41d4-a716-446655440000"
+        const resp = await this.repo.create(randomUUID(), plate, model, vehicle_year, driver_id);
 
         res.json(resp);
     }
