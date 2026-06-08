@@ -8,7 +8,7 @@ class postgressRepository {
 
     async show(){
         return await this.db`
-            SELECT * FROM veiculos
+            SELECT * FROM driver
         `;
     }
 
@@ -16,7 +16,7 @@ class postgressRepository {
     const driver_id = randomUUID();
 
     const [veiculo] = await this.db`
-        INSERT INTO veiculos (plate, model, vehicle_year, driver_id)
+        INSERT INTO vehicle (plate, model, vehicle_year, driver_id)
         VALUES (${plate}, ${model}, ${vehicle_year}, ${driver_id})
         RETURNING *
     `;
